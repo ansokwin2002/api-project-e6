@@ -28,10 +28,7 @@ class ContactController extends Controller
 
 
         ]));
-        return response()->json([
-            'message'=>'created',
-            'contact'=>$contact
-        ],201);
+        return response()->json(['message'=>'created','contact'=>$contact],201);
     }
 
     /**
@@ -45,16 +42,26 @@ class ContactController extends Controller
     /**
      * Update the specified resource in storage.
      */
+    
     public function update(Request $request, $id)
     {
-        $contact = Contact::findOrFail($id);
-        $contact->update($request->validate([
-            'name' => 'required|string|max:255',
-            'email'=> 'required|email|unique:contacts,email,'.$id,
-            'phone' => 'nullable|string',
-        ]));
-        return response()->json($contact);
+        $contact = Contact::find($id);
+        if (!$contact) {
+            return response()->json(['message' => 'Contact not found'], 404);
+        }
+
+        $request->validate([
+            'location' => 'nullable|string|max:255',
+            'phone_number' => 'nullable|string|max:20',
+            'email' => 'nullable|email|max:50',
+            'link' => 'nullable|string|max:255',
+        ]);
+
+        $contact->update($request->all());
+
+        return response()->json(['message' => 'Contact updated successfully', 'contact' => $contact], 200);
     }
+
 
     /**
      * Remove the specified resource from storage.

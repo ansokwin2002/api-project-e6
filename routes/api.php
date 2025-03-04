@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\NewUsersController;
@@ -45,7 +46,6 @@ Route::controller(SlideController::class)->group(function () {
     Route::get('slides', 'index');
     Route::get('slides/{id}', 'show');
     Route::post('store-slides', 'store');
-    Route::get('edit-slides/{id}','edit');
     Route::put('update-slides/{id}', 'update');
     Route::delete('delete-slides/{id}', 'destroy');
 });
@@ -58,4 +58,13 @@ Route::controller(ContactController::class)->group(function () {
     Route::put('update-contacts/{id}', 'update'); 
     Route::delete('delete-contacts/{id}', 'destroy');
 });
+
+Route::controller(AboutUsController::class)->group(function () {
+    Route::get('about', 'index'); 
+    Route::get('about/{id}', 'show'); 
+    Route::post('store-about', 'store'); 
+    Route::put('update-about/{id}', 'update'); 
+    Route::delete('delete-about/{id}', 'destroy');
+});
+
 
