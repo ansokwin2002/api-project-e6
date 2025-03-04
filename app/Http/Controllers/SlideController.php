@@ -12,7 +12,8 @@ class SlideController extends Controller
      */
     public function index()
     {
-        //
+        $slides = Slide::all();
+        return response()->json($slides);
     }
 
     /**
