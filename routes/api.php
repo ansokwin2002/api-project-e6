@@ -1,9 +1,13 @@
 <?php
 
+use App\Http\Controllers\AboutUsController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\NewUsersController;
+use App\Http\Controllers\SlideController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -37,3 +41,30 @@ Route::controller(ItemController::class)->group(function () {
     Route::put('update-items/{id}', 'update');
     Route::delete('delete-items/{id}', 'destroy');
 });
+
+Route::controller(SlideController::class)->group(function () {
+    Route::get('slides', 'index');
+    Route::get('slides/{id}', 'show');
+    Route::post('store-slides', 'store');
+    Route::put('update-slides/{id}', 'update');
+    Route::delete('delete-slides/{id}', 'destroy');
+});
+
+
+Route::controller(ContactController::class)->group(function () {
+    Route::get('contacts', 'index'); 
+    Route::get('contacts/{id}', 'show'); 
+    Route::post('store-contacts', 'store'); 
+    Route::put('update-contacts/{id}', 'update'); 
+    Route::delete('delete-contacts/{id}', 'destroy');
+});
+
+Route::controller(AboutUsController::class)->group(function () {
+    Route::get('about', 'index'); 
+    Route::get('about/{id}', 'show'); 
+    Route::post('store-about', 'store'); 
+    Route::put('update-about/{id}', 'update'); 
+    Route::delete('delete-about/{id}', 'destroy');
+});
+
+
